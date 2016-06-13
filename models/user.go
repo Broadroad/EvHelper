@@ -10,24 +10,12 @@ var (
 	UserList map[string]*User
 )
 
-func init() {
-	UserList = make(map[string]*User)
-	u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
-	UserList["user_11111"] = &u
-}
-
 type User struct {
-	Id       string
-	Username string
-	Password string
-	Profile  Profile
-}
-
-type Profile struct {
-	Gender  string
-	Age     int
-	Address string
-	Email   string
+	Id        string
+	Telephone string
+	Username  string
+	Password  string
+	Points    float64
 }
 
 func AddUser(u User) string {
@@ -37,6 +25,8 @@ func AddUser(u User) string {
 }
 
 func GetUser(uid string) (u *User, err error) {
+	o := orm.NewOrm()
+
 	if u, ok := UserList[uid]; ok {
 		return u, nil
 	}
