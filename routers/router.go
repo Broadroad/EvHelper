@@ -20,14 +20,13 @@ func init() {
 				&controllers.ObjectController{},
 			),
 		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
-			),
-		),
 
 		beego.NSRouter("/order", &controllers.SfOrderController{}, "get:GetAll"),
 		beego.NSRouter("/order", &controllers.SfOrderController{}, "post:Add"),
+		beego.NSRouter("/user", &controllers.UserController{}, "post:Post"),
+		beego.NSRouter("/user/:telephone", &controllers.UserController{}, "get:Get"),
+		beego.NSRouter("/image", &controllers.ImagesController{}, "post:Post;get:GetAll"),
+		beego.NSRouter("/image/:imgId", &controllers.ImagesController{}, "get:Get"),
 	)
 	beego.AddNamespace(ns)
 }
