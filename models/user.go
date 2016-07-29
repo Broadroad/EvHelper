@@ -10,17 +10,15 @@ var (
 	UserList map[string]*User
 )
 
-func init() {
-	UserList = make(map[string]*User)
-	u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
-	UserList["user_11111"] = &u
-}
-
 type User struct {
-	Id       string
-	Username string
-	Password string
-	Profile  Profile
+	Userid        int `orm:"pk;auto"`
+	Username      string
+	Password      string
+	Registertime  time.Time
+	Lastlogintime time.Time
+	Email         string
+	Telephone     string
+	Idcard        string
 }
 
 type Profile struct {

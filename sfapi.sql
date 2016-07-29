@@ -41,3 +41,33 @@ CREATE TABLE `sf_order` (
     PRIMARY KEY (`orderid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+--  le structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `sf_user`;
+CREATE TABLE `sf_user` (
+    `userid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `username` varchar(20) NOT NULL COMMENT '用户昵称',
+    `password` varchar(20) NOT NULL COMMENT '用户密码',
+    `registertime` datetime DEFAULT NULL COMMENT '注册时间',
+    `lastlogintime` datetime DEFAULT NULL COMMENT '接单时间',
+    `email` varchar(20) NOT NULL COMMENT '邮箱',
+--    `price` DECIMAL(5,2) DEFAULT NULL COMMENT '发单用户出价', 
+    `telephone` varchar(11) DEFAULT NULL COMMENT '手机号码',
+    `idcard` varchar(100) DEFAULT NULL COMMENT '身份证',
+    PRIMARY KEY (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+--  le structure for `evcard_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `evcard_user`;
+CREATE TABLE `evcard_user` (
+    `userid` int(10) unsigned NOT NULL COMMENT 'sf_userid',
+    `username` varchar(20) NOT NULL COMMENT 'evcard注册手机',
+    `password` varchar(20) NOT NULL COMMENT 'evcard用户密码',
+    PRIMARY KEY (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+SET FOREIGN_KEY_CHECKS = 1;
