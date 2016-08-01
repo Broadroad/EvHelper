@@ -1,16 +1,13 @@
 package models
 
 import (
-	"errors"
-	"strconv"
+	//	"errors"
+	//	"strconv"
+	"github.com/astaxie/beego/orm"
 	"time"
 )
 
-var (
-	UserList map[string]*User
-)
-
-type User struct {
+type SfUser struct {
 	Userid        int `orm:"pk;auto"`
 	Username      string
 	Password      string
@@ -21,64 +18,24 @@ type User struct {
 	Idcard        string
 }
 
-type Profile struct {
-	Gender  string
-	Age     int
-	Address string
-	Email   string
+func (this *SfUser) AddUser() error {
+	_, err := orm.NewOrm().Insert(this)
+	return err
 }
 
-func AddUser(u User) string {
-	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
-	UserList[u.Id] = &u
-	return u.Id
-}
-
-func GetUser(uid string) (u *User, err error) {
-	if u, ok := UserList[uid]; ok {
-		return u, nil
+func GetUserByEmail(email string) (*SfUser, error) {
+	u := &SfUser{}
+	err := orm.NewOrm().QueryTable("sf_user").Filter("email", email).One(u)
+	if err != nil {
+		return nil, err
 	}
-	return nil, errors.New("User not exists")
+	return u, nil
 }
 
-func GetAllUsers() map[string]*User {
-	return UserList
-}
-
-func UpdateUser(uid string, uu *User) (a *User, err error) {
-	if u, ok := UserList[uid]; ok {
-		if uu.Username != "" {
-			u.Username = uu.Username
-		}
-		if uu.Password != "" {
-			u.Password = uu.Password
-		}
-		if uu.Profile.Age != 0 {
-			u.Profile.Age = uu.Profile.Age
-		}
-		if uu.Profile.Address != "" {
-			u.Profile.Address = uu.Profile.Address
-		}
-		if uu.Profile.Gender != "" {
-			u.Profile.Gender = uu.Profile.Gender
-		}
-		if uu.Profile.Email != "" {
-			u.Profile.Email = uu.Profile.Email
-		}
-		return u, nil
-	}
-	return nil, errors.New("User Not Exist")
-}
-
-func Login(username, password string) bool {
-	for _, u := range UserList {
-		if u.Username == username && u.Password == password {
-			return true
-		}
-	}
-	return false
-}
-
-func DeleteUser(uid string) {
-	delete(UserList, uid)
+func GetAllUsers() ([]*SfUser, error) {
+	var Users []*SfUser
+	o := orm.NewOrm()
+	qs := o.QueryTable("sf_user")
+	_, err := qs.OrderBy("-registertime").All(&Users)
+	return Users, err
 }

@@ -76,32 +76,4 @@ func init() {
 			[]string{"get"},
 			nil})
 
-	beego.GlobalControllerRouter["sfapi/controllers:UserController"] = append(beego.GlobalControllerRouter["sfapi/controllers:UserController"],
-		beego.ControllerComments{
-			"Put",
-			`/:uid`,
-			[]string{"put"},
-			nil})
-
-	beego.GlobalControllerRouter["sfapi/controllers:UserController"] = append(beego.GlobalControllerRouter["sfapi/controllers:UserController"],
-		beego.ControllerComments{
-			"Delete",
-			`/:uid`,
-			[]string{"delete"},
-			nil})
-
-	beego.GlobalControllerRouter["sfapi/controllers:UserController"] = append(beego.GlobalControllerRouter["sfapi/controllers:UserController"],
-		beego.ControllerComments{
-			"Login",
-			`/login`,
-			[]string{"get"},
-			nil})
-
-	beego.GlobalControllerRouter["sfapi/controllers:UserController"] = append(beego.GlobalControllerRouter["sfapi/controllers:UserController"],
-		beego.ControllerComments{
-			"Logout",
-			`/logout`,
-			[]string{"get"},
-			nil})
-
 }

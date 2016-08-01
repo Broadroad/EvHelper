@@ -14,6 +14,8 @@ func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:zk@/sf?charset=utf8&loc=Local")
 	orm.RegisterModel(&models.SfOrder{})
+	orm.RegisterModel(&models.SfUser{})
+	orm.RegisterModel(&models.EvcardUser{})
 }
 
 func main() {

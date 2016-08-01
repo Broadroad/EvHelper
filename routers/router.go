@@ -25,7 +25,11 @@ func init() {
 				&controllers.UserController{},
 			),
 		),
-
+		beego.NSNamespace("/evcarduser",
+			beego.NSInclude(
+				&controllers.UserController{},
+			),
+		),
 		beego.NSRouter("/order", &controllers.SfOrderController{}, "get:GetAll"),
 		beego.NSRouter("/order", &controllers.SfOrderController{}, "post:Add"),
 	)
