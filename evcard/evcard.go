@@ -164,7 +164,7 @@ func (evcard *EvcardUser) orderCar() {
 
 func main() {
 	session = grequests.NewSession(nil)
-	evcard := &EvcardUser{Username: "13162502908", Password: "zkZK1234", ShopSeq: 1}
+	evcard := &EvcardUser{Username: "", Password: "", ShopSeq: 1}
 	evcard.login()
 	// You can modify the request by passing an optional RequestOptions struct
 	GetAllShopInfoList()
